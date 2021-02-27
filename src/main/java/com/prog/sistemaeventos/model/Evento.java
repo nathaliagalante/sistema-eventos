@@ -24,8 +24,7 @@ public class Evento {
     private String publicoAlvo;
     private double valorInvestimento;
 
-    //Teste de integração Git: Pull
-    
+
     @OneToMany
     private List<Usuario> usuários = new ArrayList();
 
