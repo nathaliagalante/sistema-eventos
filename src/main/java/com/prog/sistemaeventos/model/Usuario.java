@@ -4,13 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 public class Usuario {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +26,9 @@ public class Usuario {
 
     @Column(columnDefinition = "text")
     private String foto;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<Telefone> telefones = new ArrayList();
 
     @ManyToMany
     private List<Usuario> parentes = new ArrayList();
@@ -83,7 +89,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-    
 
     @Override
     public int hashCode() {
@@ -129,6 +134,7 @@ public class Usuario {
         this.setFoto(resp);
     }*/
 
+
     public List<Usuario> getParentes() {
         return parentes;
     }
@@ -148,6 +154,25 @@ public class Usuario {
     public void removerParente(Usuario usuario){
         this.parentes.remove(usuario);
         usuario.getParentes().remove(this);
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public void adicionarTelefones(Telefone telefone){
+        if(telefone.getDdd()!=null && telefone.getNumero()!=null)
+        {
+            telefones.add(telefone);
+        }   
+    }
+    
+    public void removerTelefones(Telefone telefone){
+        telefones.remove(telefone);
     }
 
     
