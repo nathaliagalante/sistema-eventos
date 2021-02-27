@@ -100,6 +100,14 @@ public class Evento {
         this.valorInvestimento = valorInvestimento;
     }
 
+    public List<Usuario> getUsuários() {
+        return usuários;
+    }
+
+    public void setUsuários(List<Usuario> usuários) {
+        this.usuários = usuários;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
