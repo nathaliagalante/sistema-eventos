@@ -21,6 +21,8 @@ public class Evento {
     private String publicoAlvo;
     private double valorInvestimento;
 
+    //Teste de integração Git: Pull
+
     public Long getId() {
         return id;
     }
