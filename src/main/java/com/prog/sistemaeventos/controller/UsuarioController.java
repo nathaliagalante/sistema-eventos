@@ -3,7 +3,7 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prog.sistemaeventos.controller.request.UsuarioRq;
+import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
@@ -24,12 +24,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/consultar")
-    public List<UsuarioRq> getUsuarios(){
+    public List<UsuarioCadastroRS> getUsuarios(){
         List<Usuario> usuarios = usuarioRepository.findAll();
 
-        List<UsuarioRq> usrs = new ArrayList<UsuarioRq>();
+        List<UsuarioCadastroRS> usrs = new ArrayList<UsuarioCadastroRS>();
         for(Usuario usuario: usuarios){
-            UsuarioRq user = new UsuarioRq();
+            UsuarioCadastroRS user = new UsuarioCadastroRS();
             user.setDataNascimento(usuario.getDataNascimento());
             user.setEndereco(usuario.getEndereco());
             user.setId(usuario.getId());
@@ -54,7 +54,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/gravar")
-    public void gravar(@RequestBody UsuarioRq usuarioRequest) throws Exception{
+    public void gravar(@RequestBody UsuarioCadastroRS usuarioRequest) throws Exception{
         Usuario usuario = new Usuario();
         usuario.setDataNascimento(usuarioRequest.getDataNascimento());
         usuario.setEndereco(usuarioRequest.getEndereco());
@@ -67,7 +67,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/alterar/{id}")
-    public void alterar(@PathVariable("id") Long id, @RequestBody UsuarioRq usuarioRequest) throws Exception{
+    public void alterar(@PathVariable("id") Long id, @RequestBody UsuarioCadastroRS usuarioRequest) throws Exception{
         
         var u = usuarioRepository.findById(id);
 

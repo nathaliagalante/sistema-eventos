@@ -3,7 +3,7 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prog.sistemaeventos.controller.request.EventoRq;
+import com.prog.sistemaeventos.controller.request.EventoRS;
 import com.prog.sistemaeventos.model.Evento;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.EventoRepository;
@@ -28,12 +28,12 @@ public class EventoController {
     }
 
     @GetMapping("/consultar")
-    public List<EventoRq> getEventos(){
+    public List<EventoRS> getEventos(){
         List<Evento> eventos = eventoRepository.findAll();
         
-        List<EventoRq> evrq = new ArrayList<EventoRq>();
+        List<EventoRS> evrq = new ArrayList<EventoRS>();
         for (Evento evento: eventos){
-            EventoRq ev = new EventoRq();
+            EventoRS ev = new EventoRS();
             ev.setNome(evento.getNome());
             ev.setDescricao(evento.getDescricao());
             ev.setId(evento.getId());
@@ -50,7 +50,7 @@ public class EventoController {
     }
 
     @PostMapping("/gravar")
-    public void gravar(@RequestBody EventoRq eventoRq){
+    public void gravar(@RequestBody EventoRS eventoRq){
         Evento evento = new Evento();
         evento.setDataInicio(eventoRq.getDataInicio());
         evento.setDataFim(eventoRq.getDataFim());
@@ -82,7 +82,7 @@ public class EventoController {
     }
 
     @PostMapping("/alterar/{id}")
-    public void alterar(@PathVariable("id") Long id, @RequestBody EventoRq eventoRq) throws Exception{
+    public void alterar(@PathVariable("id") Long id, @RequestBody EventoRS eventoRq) throws Exception{
 
         var e = eventoRepository.findById(id);
 

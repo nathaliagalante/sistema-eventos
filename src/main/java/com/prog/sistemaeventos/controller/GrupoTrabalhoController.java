@@ -3,8 +3,8 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prog.sistemaeventos.controller.request.GrupoTrabalhoRq;
-import com.prog.sistemaeventos.controller.request.UsuarioRq;
+import com.prog.sistemaeventos.controller.request.GrupoTrabalhoRS;
+import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
 import com.prog.sistemaeventos.model.GrupoTrabalho;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.GrupoTrabalhoRepository;
@@ -27,12 +27,12 @@ public class GrupoTrabalhoController {
     }
 
     @GetMapping("/consultar")
-    public List<GrupoTrabalhoRq> getGrupos(){
+    public List<GrupoTrabalhoRS> getGrupos(){
         List<GrupoTrabalho> grupos = grupoRepository.findAll();
 
-        List<GrupoTrabalhoRq> gprs = new ArrayList<GrupoTrabalhoRq>();
+        List<GrupoTrabalhoRS> gprs = new ArrayList<GrupoTrabalhoRS>();
         for(GrupoTrabalho grupo: grupos){
-            GrupoTrabalhoRq gp = new GrupoTrabalhoRq();
+            GrupoTrabalhoRS gp = new GrupoTrabalhoRS();
             gp.setId(grupo.getId());
             gp.setNome(grupo.getNome());
             gp.setDescricao(grupo.getDescricao());
@@ -49,7 +49,7 @@ public class GrupoTrabalhoController {
     }
 
     @PostMapping("/gravar")
-    public void gravar(@RequestBody GrupoTrabalhoRq grupoRequest) throws Exception{
+    public void gravar(@RequestBody GrupoTrabalhoRS grupoRequest) throws Exception{
         GrupoTrabalho grupo = new GrupoTrabalho();
         grupo.setNome(grupoRequest.getNome());
         grupo.setDescricao(grupoRequest.getDescricao());
@@ -60,7 +60,7 @@ public class GrupoTrabalhoController {
     }
 
     @PostMapping("/alterar/{id}")
-    public void alterar(@PathVariable("id") Long id, @RequestBody GrupoTrabalhoRq grupoRequest) throws Exception{
+    public void alterar(@PathVariable("id") Long id, @RequestBody GrupoTrabalhoRS grupoRequest) throws Exception{
         
         var g = grupoRepository.findById(id);
 

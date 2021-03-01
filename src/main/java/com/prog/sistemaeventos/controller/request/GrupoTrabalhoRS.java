@@ -3,7 +3,7 @@ package com.prog.sistemaeventos.controller.request;
 import java.time.LocalDate;
 import java.util.List;
 
-public class GrupoTrabalhoRq {
+public class GrupoTrabalhoRS {
     private Long id;
     private String nome;
     private String descricao;

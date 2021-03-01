@@ -7,21 +7,21 @@ import java.util.List;
 import com.prog.sistemaeventos.model.Telefone;
 import com.prog.sistemaeventos.model.Usuario;
 
-
-public class UsuarioRq {
+public class SuaContaAlterarSaidaRS {
+    
     private Long id;
+    
     private String nomeCompleto;
     private String sexo;
     private String endereco;
     private LocalDate dataNascimento;
     private String login;
     private String senha;
-    private String grupo;
+    private String foto;
+    private List<Telefone> telefones = new ArrayList<>();
+    private List<Usuario> parentes = new ArrayList<>();
+    private String grupoTrabalho;
     private String nivelAcesso;
-
-    private List<Telefone> telefones = new ArrayList();
-
-    private List<Usuario> parentes = new ArrayList();
 
     public Long getId() {
         return id;
@@ -79,6 +79,14 @@ public class UsuarioRq {
         this.senha = senha;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public List<Telefone> getTelefones() {
         return telefones;
     }
@@ -95,12 +103,12 @@ public class UsuarioRq {
         this.parentes = parentes;
     }
 
-    public String getGrupo() {
-        return grupo;
+    public String getGrupoTrabalho() {
+        return grupoTrabalho;
     }
 
-    public void setGrupo(String grupo) {
-        this.grupo = grupo;
+    public void setGrupoTrabalho(String grupoTrabalho) {
+        this.grupoTrabalho = grupoTrabalho;
     }
 
     public String getNivelAcesso() {
@@ -110,6 +118,8 @@ public class UsuarioRq {
     public void setNivelAcesso(String nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
+
+    
 
     
 }
