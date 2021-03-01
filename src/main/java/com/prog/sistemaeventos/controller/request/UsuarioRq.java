@@ -1,6 +1,12 @@
 package com.prog.sistemaeventos.controller.request;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.prog.sistemaeventos.model.Telefone;
+import com.prog.sistemaeventos.model.Usuario;
+
 
 public class UsuarioRq {
     private Long id;
@@ -10,6 +16,12 @@ public class UsuarioRq {
     private LocalDate dataNascimento;
     private String login;
     private String senha;
+    private String grupo;
+    private String nivelAcesso;
+
+    private List<Telefone> telefones = new ArrayList();
+
+    private List<Usuario> parentes = new ArrayList();
 
     public Long getId() {
         return id;
@@ -67,4 +79,37 @@ public class UsuarioRq {
         this.senha = senha;
     }
 
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<Usuario> getParentes() {
+        return parentes;
+    }
+
+    public void setParentes(List<Usuario> parentes) {
+        this.parentes = parentes;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    public String getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(String nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
+
+    
 }

@@ -1,6 +1,7 @@
 package com.prog.sistemaeventos.controller.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class GrupoTrabalhoRq {
     private Long id;
@@ -8,6 +9,8 @@ public class GrupoTrabalhoRq {
     private String descricao;
     private LocalDate dataCriacao = LocalDate.now();
     private LocalDate dataRenovacao;
+
+    private List<String> membros;
 
     public Long getId() {
         return id;
@@ -47,6 +50,14 @@ public class GrupoTrabalhoRq {
 
     public void setDataRenovacao(LocalDate dataRenovacao) {
         this.dataRenovacao = dataRenovacao;
+    }
+
+    public List<String> getMembros() {
+        return membros;
+    }
+
+    public void setMembros(List<String> membros) {
+        this.membros = membros;
     }
 
 }

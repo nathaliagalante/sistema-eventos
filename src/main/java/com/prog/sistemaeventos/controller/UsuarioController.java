@@ -8,9 +8,14 @@ import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
     private final UsuarioRepository usuarioRepository;
     
@@ -18,7 +23,7 @@ public class UsuarioController {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/consultar")
     public List<UsuarioRq> getUsuarios(){
         List<Usuario> usuarios = usuarioRepository.findAll();
 
@@ -32,13 +37,23 @@ public class UsuarioController {
             user.setNomeCompleto(usuario.getNomeCompleto());
             user.setSenha(usuario.getSenha());
             user.setSexo(usuario.getSexo());
+            user.setParentes(usuario.getParentes());
+            user.setTelefones(usuario.getTelefones());
+            if(usuario.getGrupoTrabalho()!=null){
+                user.setGrupo(usuario.getGrupoTrabalho().getNome());
+            }
+            if(usuario.getNivelAcesso()!=null){
+                user.setNivelAcesso(usuario.getNivelAcesso().name());
+            }
+                        
+            
             usrs.add(user);
         }
 
         return usrs;
     }
 
-    @PostMapping("/")
+    @PostMapping("/gravar")
     public void gravar(@RequestBody UsuarioRq usuarioRequest) throws Exception{
         Usuario usuario = new Usuario();
         usuario.setDataNascimento(usuarioRequest.getDataNascimento());
@@ -49,5 +64,53 @@ public class UsuarioController {
         usuario.setSexo(usuarioRequest.getSexo());
 
         usuarioRepository.save(usuario);
+    }
+
+    @PostMapping("/alterar/{id}")
+    public void alterar(@PathVariable("id") Long id, @RequestBody UsuarioRq usuarioRequest) throws Exception{
+        
+        var u = usuarioRepository.findById(id);
+
+        if(u.isPresent()){
+            Usuario usuario = u.get();
+            if(usuarioRequest.getDataNascimento()!=null){
+                usuario.setDataNascimento(usuarioRequest.getDataNascimento());
+            }
+            if(usuarioRequest.getEndereco()!=null){
+                usuario.setEndereco(usuarioRequest.getEndereco());
+            }
+            if(usuarioRequest.getLogin()!=null){
+                usuario.setLogin(usuarioRequest.getLogin());
+            }
+            if(usuarioRequest.getNomeCompleto()!=null){
+                usuario.setNomeCompleto(usuarioRequest.getNomeCompleto());
+            }
+            if(usuarioRequest.getSenha()!=null){
+                usuario.setSenha(usuarioRequest.getSenha());
+            }
+            if(usuarioRequest.getSexo()!=null){
+                usuario.setSexo(usuarioRequest.getSexo());
+            }
+            usuarioRepository.save(usuario);
+        }
+        else{
+            throw new Exception("ID não encontrado!");
+        }
+        
+        
+    }
+
+    @PostMapping("/excluir/{id}")
+    public void excluir(@PathVariable("id") Long id) throws Exception{
+
+        var u = usuarioRepository.findById(id);
+
+        if(u.isPresent()){
+            Usuario usuario = u.get();
+            usuarioRepository.delete(usuario);
+        }
+        else{
+            throw new Exception("ID não encontrado!");
+        }
     }
 }

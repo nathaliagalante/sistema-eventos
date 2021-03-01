@@ -4,11 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 public class Evento {
@@ -24,9 +28,9 @@ public class Evento {
     private String publicoAlvo;
     private double valorInvestimento;
 
-
+    @JoinTable(name = "evento_usuario")
     @OneToMany
-    private List<Usuario> usuários = new ArrayList();
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -100,12 +104,12 @@ public class Evento {
         this.valorInvestimento = valorInvestimento;
     }
 
-    public List<Usuario> getUsuários() {
-        return usuários;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuários(List<Usuario> usuários) {
-        this.usuários = usuários;
+    public void setUsuarios(List<Usuario> usuários) {
+        this.usuarios = usuários;
     }
 
     @Override
