@@ -1,6 +1,6 @@
-package com.prog.sistemaeventos.controller.request.Grupo;
+package com.prog.sistemaeventos.controller.request.Grupo.Membro;
 
-public class GrupoMembrosEntradaRS {
+public class MembroSelecionarLiderEntradaRS {
     private Long id;
 
     public Long getId() {
@@ -10,5 +10,4 @@ public class GrupoMembrosEntradaRS {
     public void setId(Long id) {
         this.id = id;
     }
-
 }
