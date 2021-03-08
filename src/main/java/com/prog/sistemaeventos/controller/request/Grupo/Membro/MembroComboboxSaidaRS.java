@@ -9,8 +9,6 @@ public class MembroComboboxSaidaRS {
     private Long id;
     private String nomeCompleto;
 
-    private List<Usuario> usuarios = new ArrayList<>();
-
     public Long getId() {
         return id;
     }
@@ -25,14 +23,6 @@ public class MembroComboboxSaidaRS {
 
     public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 
 }
