@@ -8,11 +8,11 @@ POST http://localhost:8090/usuario/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nomeCompleto": "João Victor Capistrano da SIlva",
+    "nomeCompleto": "Jeffrey Lebowski",
     "sexo": "Masculino",
-    "endereco": "Rua Camboriú, 239",
-    "dataNascimento": "1998-01-21",
-    "login": "joaovcapistrano",
+    "endereco": "Los Angeles",
+    "dataNascimento": "1965-07-09",
+    "login": "thedude2",
     "senha": "123"
 
 }
@@ -74,7 +74,7 @@ POST http://localhost:8090/grupo/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Grupo A",
+    "nome": "Grupo 1",
     "descricao": "Grupo de desenvolvimento",
     "dataRenovacao": "2021-07-27"
 
@@ -93,4 +93,26 @@ content-type: application/json
 ### GRUPO - EXCLUIR
 
 POST http://localhost:8090/grupo/excluir/1 HTTP/1.1
+content-type: application/json
+POST http://localhost:8080/grupo/excluir/1 HTTP/1.1
+content-type: application/json
+
+### GRUPO - ADICIONAR MEMBRO
+
+POST http://localhost:8080/grupo/gerenciar/1/membros/adicionar/2 HTTP/1.1
+content-type: application/json
+
+### GRUPO - REMOVER MEMBRO
+
+POST http://localhost:8080/grupo/gerenciar/1/membros/remover/2 HTTP/1.1
+content-type: application/json
+
+### GRUPO - ESVAZIAR GRUPO
+
+POST http://localhost:8080/grupo/gerenciar/1/membros/esvaziar HTTP/1.1
+content-type: application/json
+
+### GRUPO - ESCOLHER LÍDER
+
+POST http://localhost:8080/grupo/gerenciar/1/membros/lider/2 HTTP/1.1
 content-type: application/json
