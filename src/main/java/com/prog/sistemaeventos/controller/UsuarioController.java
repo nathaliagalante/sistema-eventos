@@ -36,8 +36,7 @@ public class UsuarioController {
             user.setLogin(usuario.getLogin());
             user.setNomeCompleto(usuario.getNomeCompleto());
             user.setSenha(usuario.getSenha());
-            user.setSexo(usuario.getSexo());
-            user.setParentes(usuario.getParentes());
+            user.setSexo(usuario.getSexo()); 
             user.setTelefones(usuario.getTelefones());
             if(usuario.getGrupoTrabalho()!=null){
                 user.setGrupo(usuario.getGrupoTrabalho().getNome());
@@ -45,6 +44,12 @@ public class UsuarioController {
             if(usuario.getNivelAcesso()!=null){
                 user.setNivelAcesso(usuario.getNivelAcesso().name());
             }
+
+            List<String> parentesList = new ArrayList<>();
+            for(Usuario par: usuario.getParentes()){
+                parentesList.add(par.getNomeCompleto());
+            }
+            user.setParentes(parentesList);
                         
             
             usrs.add(user);
@@ -111,6 +116,43 @@ public class UsuarioController {
         }
         else{
             throw new Exception("ID não encontrado!");
+        }
+    }
+
+    @PostMapping("/gerenciar/{id}/parente/adicionar/{idparente}")
+    public void adicionarParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente){
+        
+        var u = usuarioRepository.findById(id);
+        var p = usuarioRepository.findById(idparente);
+
+        if(u.isPresent() && p.isPresent()){
+                Usuario usuario = u.get();
+                Usuario parente = p.get();
+                
+                usuario.adicionarParente(parente);
+
+                usuarioRepository.save(usuario);
+                usuarioRepository.save(parente);
+        }
+    }
+
+    @PostMapping("/gerenciar/{id}/parente/remover/{idparente}")
+    public void removerParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente){
+        
+        var u = usuarioRepository.findById(id);
+        var p = usuarioRepository.findById(idparente);
+
+        if(u.isPresent() && p.isPresent()){
+            Usuario usuario = u.get();
+            Usuario parente = p.get();
+            
+            if(usuario.getParentes().contains(parente)){
+                usuario.removerParente(parente);
+
+                usuarioRepository.save(usuario);
+                usuarioRepository.save(parente);
+            }
+            
         }
     }
 }

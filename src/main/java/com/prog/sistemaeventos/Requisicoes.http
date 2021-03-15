@@ -8,11 +8,11 @@ POST http://localhost:8080/usuario/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nomeCompleto": "João Victor Capistrano da SIlva",
+    "nomeCompleto": "Guilherme Baltor",
     "sexo": "Masculino",
-    "endereco": "Rua Camboriú, 239",
-    "dataNascimento": "1998-01-21",
-    "login": "joaovcapistrano",
+    "endereco": "Rio das Ostras",
+    "dataNascimento": "1998-04-18",
+    "login": "nyrthol",
     "senha": "123"
 
 }
@@ -30,6 +30,16 @@ content-type: application/json
 ### USUÁRIO - EXCLUIR
 
 POST http://localhost:8080/usuario/excluir/1 HTTP/1.1
+content-type: application/json
+
+### USUÁRIO - ADICIONAR PARENTE
+
+POST http://localhost:8080/usuario/gerenciar/2/parente/adicionar/4 HTTP/1.1
+content-type: application/json
+
+### USUÁRIO - REMOVER PARENTE
+
+POST http://localhost:8080/usuario/gerenciar/2/parente/remover/4 HTTP/1.1
 content-type: application/json
 
 ### EVENTO - CONSULTAR

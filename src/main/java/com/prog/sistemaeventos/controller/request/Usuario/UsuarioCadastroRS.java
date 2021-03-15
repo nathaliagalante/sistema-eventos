@@ -21,7 +21,7 @@ public class UsuarioCadastroRS {
 
     private List<Telefone> telefones = new ArrayList();
 
-    private List<Usuario> parentes = new ArrayList();
+    private List<String> parentes = new ArrayList();
 
     public Long getId() {
         return id;
@@ -87,11 +87,11 @@ public class UsuarioCadastroRS {
         this.telefones = telefones;
     }
 
-    public List<Usuario> getParentes() {
+    public List<String> getParentes() {
         return parentes;
     }
 
-    public void setParentes(List<Usuario> parentes) {
+    public void setParentes(List<String> parentes) {
         this.parentes = parentes;
     }
 
