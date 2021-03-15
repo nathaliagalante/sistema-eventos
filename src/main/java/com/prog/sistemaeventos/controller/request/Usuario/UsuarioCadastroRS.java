@@ -17,7 +17,7 @@ public class UsuarioCadastroRS {
     private String login;
     private String senha;
     private String grupo;
-    private String nivelAcesso;
+    private Integer nivelAcesso;
 
     private List<Telefone> telefones = new ArrayList();
 
@@ -103,11 +103,11 @@ public class UsuarioCadastroRS {
         this.grupo = grupo;
     }
 
-    public String getNivelAcesso() {
+    public Integer getNivelAcesso() {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(String nivelAcesso) {
+    public void setNivelAcesso(Integer nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
 

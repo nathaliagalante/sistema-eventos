@@ -46,7 +46,7 @@ public class Usuario {
     private GrupoTrabalho grupoTrabalho;
 
     @Enumerated(EnumType.STRING)
-    private NivelAcesso nivelAcesso;
+    private Integer nivelAcesso;
 
     public Long getId() {
         return id;
@@ -198,12 +198,12 @@ public class Usuario {
         this.grupoTrabalho = grupoTrabalho;
     }
 
-    public NivelAcesso getNivelAcesso() {
+    public Integer getNivelAcesso() {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(NivelAcesso nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
+    public void setNivelAcesso(Integer integer) {
+        this.nivelAcesso = integer;
     }
     
 }

@@ -1,10 +1,10 @@
 ### USUÁRIO - CONSULTAR
 
-GET http://localhost:8080/usuario/consultar HTTP/1.1
+GET http://localhost:8090/usuario/consultar HTTP/1.1
 
 ### USUÁRIO - GRAVAR
 
-POST http://localhost:8080/usuario/gravar HTTP/1.1
+POST http://localhost:8090/usuario/gravar HTTP/1.1
 content-type: application/json
 
 {
@@ -19,7 +19,7 @@ content-type: application/json
 
 ### USUÁRIO - ALTERAR
 
-POST http://localhost:8080/usuario/alterar/2 HTTP/1.1
+POST http://localhost:8090/usuario/alterar/2 HTTP/1.1
 content-type: application/json
 
 {
@@ -29,16 +29,16 @@ content-type: application/json
 
 ### USUÁRIO - EXCLUIR
 
-POST http://localhost:8080/usuario/excluir/1 HTTP/1.1
+POST http://localhost:8090/usuario/excluir/1 HTTP/1.1
 content-type: application/json
 
 ### EVENTO - CONSULTAR
 
-GET http://localhost:8080/evento/consultar HTTP/1.1
+GET http://localhost:8090/evento/consultar HTTP/1.1
 
 ### EVENTO - GRAVAR
 
-POST http://localhost:8080/evento/gravar HTTP/1.1
+POST http://localhost:8090/evento/gravar HTTP/1.1
 content-type: application/json
 
 {
@@ -51,7 +51,7 @@ content-type: application/json
 
 ### EVENTO - ALTERAR
 
-POST http://localhost:8080/evento/alterar/2 HTTP/1.1
+POST http://localhost:8090/evento/alterar/2 HTTP/1.1
 content-type: application/json
 
 {
@@ -61,16 +61,16 @@ content-type: application/json
 
 ### EVENTO - EXCLUIR
 
-POST http://localhost:8080/evento/excluir/1 HTTP/1.1
+POST http://localhost:8090/evento/excluir/1 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - CONSULTAR
 
-GET http://localhost:8080/grupo/consultar HTTP/1.1
+GET http://localhost:8090/grupo/consultar HTTP/1.1
 
 ### GRUPO - GRAVAR
 
-POST http://localhost:8080/grupo/gravar HTTP/1.1
+POST http://localhost:8090/grupo/gravar HTTP/1.1
 content-type: application/json
 
 {
@@ -82,7 +82,7 @@ content-type: application/json
 
 ### GRUPO - ALTERAR
 
-POST http://localhost:8080/grupo/alterar/2 HTTP/1.1
+POST http://localhost:8090/grupo/alterar/2 HTTP/1.1
 content-type: application/json
 
 {
@@ -92,5 +92,5 @@ content-type: application/json
 
 ### GRUPO - EXCLUIR
 
-POST http://localhost:8080/grupo/excluir/1 HTTP/1.1
+POST http://localhost:8090/grupo/excluir/1 HTTP/1.1
 content-type: application/json

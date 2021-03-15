@@ -31,7 +31,7 @@ public class EventoController {
     public List<EventoRS> getEventos(){
         List<Evento> eventos = eventoRepository.findAll();
         
-        List<EventoRS> evrq = new ArrayList<EventoRS>();
+        List<EventoRS> evrs = new ArrayList<EventoRS>();
         for (Evento evento: eventos){
             EventoRS ev = new EventoRS();
             ev.setNome(evento.getNome());
@@ -43,23 +43,23 @@ public class EventoController {
             ev.setLocalInscricao(evento.getLocalInscricao());;
             ev.setPublicoAlvo(evento.getPublicoAlvo());
             ev.setValorInvestimento(evento.getValorInvestimento());
-            evrq.add(ev);
+            evrs.add(ev);
         }
 
-        return evrq;
+        return evrs;
     }
 
     @PostMapping("/gravar")
-    public void gravar(@RequestBody EventoRS eventoRq){
+    public void gravar(@RequestBody EventoRS eventoRs){
         Evento evento = new Evento();
-        evento.setDataInicio(eventoRq.getDataInicio());
-        evento.setDataFim(eventoRq.getDataFim());
-        evento.setDescricao(eventoRq.getDescricao());
-        evento.setLocalEvento(eventoRq.getLocalEvento());
-        evento.setLocalInscricao(eventoRq.getLocalInscricao());
-        evento.setNome(eventoRq.getNome());
-        evento.setPublicoAlvo(eventoRq.getPublicoAlvo());
-        evento.setValorInvestimento(eventoRq.getValorInvestimento());
+        evento.setDataInicio(eventoRs.getDataInicio());
+        evento.setDataFim(eventoRs.getDataFim());
+        evento.setDescricao(eventoRs.getDescricao());
+        evento.setLocalEvento(eventoRs.getLocalEvento());
+        evento.setLocalInscricao(eventoRs.getLocalInscricao());
+        evento.setNome(eventoRs.getNome());
+        evento.setPublicoAlvo(eventoRs.getPublicoAlvo());
+        evento.setValorInvestimento(eventoRs.getValorInvestimento());
 
         //List<Usuario> usuarios = usuarioRepository.findAll();
 
