@@ -15,7 +15,7 @@ public class UsuarioAlterarEntradaNovoRS {
     private LocalDate dataNascimento;
     private String login;
     private String senha;
-    private String grupo;
+    private Long grupo;
     private String nivelAcesso;
 
     private List<Telefone> telefones = new ArrayList<>();
@@ -78,11 +78,11 @@ public class UsuarioAlterarEntradaNovoRS {
         this.senha = senha;
     }
 
-    public String getGrupo() {
+    public Long getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(String grupo) {
+    public void setGrupo(Long grupo) {
         this.grupo = grupo;
     }
 
