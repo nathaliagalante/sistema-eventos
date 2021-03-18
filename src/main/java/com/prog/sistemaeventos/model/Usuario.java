@@ -182,6 +182,7 @@ public class Usuario {
     public void adicionarTelefones(Telefone telefone){
         if(telefone.getDdd()!=null && telefone.getNumero()!=null)
         {
+            //telefone.setUsuario(this);
             telefones.add(telefone);
         }   
     }

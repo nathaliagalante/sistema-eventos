@@ -12,6 +12,7 @@ content-type: application/json
     "sexo": "Masculino",
     "endereco": "Rio das Ostras",
     "dataNascimento": "1998-04-18",
+    "nivelAcesso": "1",
     "login": "nyrthol",
     "senha": "123"
 
@@ -19,17 +20,18 @@ content-type: application/json
 
 ### USUÁRIO - ALTERAR
 
-POST http://localhost:8080/usuario/alterar/2 HTTP/1.1
+POST http://localhost:8080/usuario/alterar/6 HTTP/1.1
 content-type: application/json
 
 {
-    "senha": "012345"
+    "nomeCompleto": "Pablo Azevedo",
+    "nivelAcesso": "0"
 
 }
 
 ### USUÁRIO - EXCLUIR
 
-POST http://localhost:8080/usuario/excluir/1 HTTP/1.1
+POST http://localhost:8080/usuario/excluir/5 HTTP/1.1
 content-type: application/json
 
 ### USUÁRIO - ADICIONAR PARENTE
@@ -41,6 +43,23 @@ content-type: application/json
 
 POST http://localhost:8080/usuario/gerenciar/2/parente/remover/4 HTTP/1.1
 content-type: application/json
+
+### USUÁRIO - ADICIONAR TELEFONE
+
+POST http://localhost:8080/usuario/gerenciar/4/telefone/adicionar HTTP/1.1
+content-type: application/json
+
+{
+    "ddd": "22",
+    "numero": "987556285"
+
+}
+
+### USUÁRIO - REMOVER TELEFONE
+
+POST http://localhost:8080/usuario/gerenciar/4/telefone/remover/4 HTTP/1.1
+content-type: application/json
+
 
 ### EVENTO - CONSULTAR
 
@@ -73,6 +92,12 @@ content-type: application/json
 
 POST http://localhost:8080/evento/excluir/1 HTTP/1.1
 content-type: application/json
+
+### EVENTO - AUTOCADASTRAR ANIVERSÁRIOS
+
+POST http://localhost:8080/evento/aniversarios/2020 HTTP/1.1
+content-type: application/json
+
 
 ### GRUPO - CONSULTAR
 

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
+import com.prog.sistemaeventos.model.NivelAcesso;
+import com.prog.sistemaeventos.model.Telefone;
 import com.prog.sistemaeventos.model.Usuario;
+import com.prog.sistemaeventos.repository.TelefoneRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/usuario")
 public class UsuarioController {
     private final UsuarioRepository usuarioRepository;
+    private final TelefoneRepository telefoneRepository;
     
-    public UsuarioController(UsuarioRepository usuarioRepository){
+    public UsuarioController(UsuarioRepository usuarioRepository, TelefoneRepository telefoneRepository){
         this.usuarioRepository = usuarioRepository;
+        this.telefoneRepository = telefoneRepository;
     }
 
     @GetMapping("/consultar")
@@ -42,7 +47,7 @@ public class UsuarioController {
                 user.setGrupo(usuario.getGrupoTrabalho().getNome());
             }
             if(usuario.getNivelAcesso()!=null){
-                user.setNivelAcesso(usuario.getNivelAcesso().name());
+                user.setNivelAcesso(usuario.getNivelAcesso());
             }
 
             List<String> parentesList = new ArrayList<>();
@@ -61,12 +66,14 @@ public class UsuarioController {
     @PostMapping("/gravar")
     public void gravar(@RequestBody UsuarioCadastroRS usuarioRequest) throws Exception{
         Usuario usuario = new Usuario();
+
         usuario.setDataNascimento(usuarioRequest.getDataNascimento());
         usuario.setEndereco(usuarioRequest.getEndereco());
         usuario.setLogin(usuarioRequest.getLogin());
         usuario.setNomeCompleto(usuarioRequest.getNomeCompleto());
         usuario.setSenha(usuarioRequest.getSenha());
         usuario.setSexo(usuarioRequest.getSexo());
+        usuario.setNivelAcesso(usuarioRequest.getNivelAcesso());
 
         usuarioRepository.save(usuario);
     }
@@ -96,6 +103,9 @@ public class UsuarioController {
             if(usuarioRequest.getSexo()!=null){
                 usuario.setSexo(usuarioRequest.getSexo());
             }
+            if(usuarioRequest.getNivelAcesso()!=null){
+                usuario.setNivelAcesso(usuarioRequest.getNivelAcesso());
+            }
             usuarioRepository.save(usuario);
         }
         else{
@@ -120,7 +130,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/gerenciar/{id}/parente/adicionar/{idparente}")
-    public void adicionarParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente){
+    public void adicionarParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente) throws Exception{
         
         var u = usuarioRepository.findById(id);
         var p = usuarioRepository.findById(idparente);
@@ -134,10 +144,13 @@ public class UsuarioController {
                 usuarioRepository.save(usuario);
                 usuarioRepository.save(parente);
         }
+        else{
+            throw new Exception("ID não encontrado!");
+        }
     }
 
     @PostMapping("/gerenciar/{id}/parente/remover/{idparente}")
-    public void removerParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente){
+    public void removerParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente) throws Exception{
         
         var u = usuarioRepository.findById(id);
         var p = usuarioRepository.findById(idparente);
@@ -154,5 +167,44 @@ public class UsuarioController {
             }
             
         }
+        else{
+            throw new Exception("ID não encontrado!");
+        }
     }
+
+    /******************* TELEFONE *********************/
+    @PostMapping("/gerenciar/{id}/telefone/adicionar")
+    public void adicionarTelefone(@PathVariable("id") Long id, @RequestBody Telefone telefone) throws Exception{
+        var u = usuarioRepository.findById(id);
+
+        if(u.isPresent()){
+            Usuario usuario = u.get();
+
+            usuario.adicionarTelefones(telefone);
+
+            usuarioRepository.save(usuario);
+        }else{
+            throw new Exception("ID não encontrado!");
+        }
+    }
+
+    @PostMapping("/gerenciar/{id}/telefone/remover/{idtelefone}")
+    public void removerTelefone(@PathVariable("id") Long id, @PathVariable("idtelefone") Long idtelefone) throws Exception{
+        var u = usuarioRepository.findById(id);
+
+        var tel = telefoneRepository.findById(idtelefone);
+
+        if(u.isPresent() && tel.isPresent()){
+            Telefone telefone = tel.get();
+            Usuario usuario = u.get();
+
+            usuario.removerTelefones(telefone);
+
+            usuarioRepository.save(usuario);
+        }else{
+            throw new Exception("ID não encontrado!");
+        }
+    }
+
+    
 }

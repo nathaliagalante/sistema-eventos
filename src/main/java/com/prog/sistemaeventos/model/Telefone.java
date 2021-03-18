@@ -18,6 +18,10 @@ public class Telefone {
     @ManyToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
+    public Telefone(){
+        
+    }
+
     public Telefone(String ddd, String numero, Usuario usuario) {
         this.ddd = ddd;
         this.numero = numero;

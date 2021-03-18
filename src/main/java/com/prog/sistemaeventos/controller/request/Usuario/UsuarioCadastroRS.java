@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.prog.sistemaeventos.model.NivelAcesso;
 import com.prog.sistemaeventos.model.Telefone;
 import com.prog.sistemaeventos.model.Usuario;
 
@@ -17,7 +18,7 @@ public class UsuarioCadastroRS {
     private String login;
     private String senha;
     private String grupo;
-    private String nivelAcesso;
+    private NivelAcesso nivelAcesso;
 
     private List<Telefone> telefones = new ArrayList();
 
@@ -103,11 +104,11 @@ public class UsuarioCadastroRS {
         this.grupo = grupo;
     }
 
-    public String getNivelAcesso() {
+    public NivelAcesso getNivelAcesso() {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(String nivelAcesso) {
+    public void setNivelAcesso(NivelAcesso nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
 
