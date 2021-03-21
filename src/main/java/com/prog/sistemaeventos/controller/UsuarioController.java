@@ -3,6 +3,10 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.prog.sistemaeventos.controller.request.Usuario.TelefoneAdicionarRS;
+import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroAlterarRS;
+import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroConsultarRS;
+import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroGravarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
 import com.prog.sistemaeventos.model.NivelAcesso;
 import com.prog.sistemaeventos.model.Telefone;
@@ -29,12 +33,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/consultar")
-    public List<UsuarioCadastroRS> getUsuarios(){
+    public List<UsuarioCadastroConsultarRS> getUsuarios(){
         List<Usuario> usuarios = usuarioRepository.findAll();
 
-        List<UsuarioCadastroRS> usrs = new ArrayList<UsuarioCadastroRS>();
+        List<UsuarioCadastroConsultarRS> usrs = new ArrayList<UsuarioCadastroConsultarRS>();
         for(Usuario usuario: usuarios){
-            UsuarioCadastroRS user = new UsuarioCadastroRS();
+            UsuarioCadastroConsultarRS user = new UsuarioCadastroConsultarRS();
             user.setDataNascimento(usuario.getDataNascimento());
             user.setEndereco(usuario.getEndereco());
             user.setId(usuario.getId());
@@ -42,7 +46,6 @@ public class UsuarioController {
             user.setNomeCompleto(usuario.getNomeCompleto());
             user.setSenha(usuario.getSenha());
             user.setSexo(usuario.getSexo()); 
-            user.setTelefones(usuario.getTelefones());
             if(usuario.getGrupoTrabalho()!=null){
                 user.setGrupo(usuario.getGrupoTrabalho().getNome());
             }
@@ -55,6 +58,12 @@ public class UsuarioController {
                 parentesList.add(par.getNomeCompleto());
             }
             user.setParentes(parentesList);
+
+            List<String> telefonesList = new ArrayList<>();
+            for(Telefone tel: usuario.getTelefones()){
+                telefonesList.add(tel.toString());
+            }
+            user.setTelefones(telefonesList);
                         
             
             usrs.add(user);
@@ -64,7 +73,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/gravar")
-    public void gravar(@RequestBody UsuarioCadastroRS usuarioRequest) throws Exception{
+    public void gravar(@RequestBody UsuarioCadastroGravarRS usuarioRequest) throws Exception{
         Usuario usuario = new Usuario();
 
         usuario.setDataNascimento(usuarioRequest.getDataNascimento());
@@ -79,7 +88,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/alterar/{id}")
-    public void alterar(@PathVariable("id") Long id, @RequestBody UsuarioCadastroRS usuarioRequest) throws Exception{
+    public void alterar(@PathVariable("id") Long id, @RequestBody UsuarioCadastroAlterarRS usuarioRequest) throws Exception{
         
         var u = usuarioRepository.findById(id);
 
@@ -174,13 +183,16 @@ public class UsuarioController {
 
     /******************* TELEFONE *********************/
     @PostMapping("/gerenciar/{id}/telefone/adicionar")
-    public void adicionarTelefone(@PathVariable("id") Long id, @RequestBody Telefone telefone) throws Exception{
+    public void adicionarTelefone(@PathVariable("id") Long id, @RequestBody TelefoneAdicionarRS telefoneRequest) throws Exception{
         var u = usuarioRepository.findById(id);
 
         if(u.isPresent()){
             Usuario usuario = u.get();
+            Telefone tel = new Telefone();
+            tel.setDdd(telefoneRequest.getDdd());
+            tel.setNumero(telefoneRequest.getNumero());
 
-            usuario.adicionarTelefones(telefone);
+            usuario.adicionarTelefones(tel);
 
             usuarioRepository.save(usuario);
         }else{
