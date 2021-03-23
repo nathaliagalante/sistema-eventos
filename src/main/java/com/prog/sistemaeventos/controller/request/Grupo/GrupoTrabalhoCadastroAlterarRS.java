@@ -1,24 +1,15 @@
-package com.prog.sistemaeventos.controller.request;
+package com.prog.sistemaeventos.controller.request.Grupo;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class GrupoTrabalhoRS {
-    private Long id;
+public class GrupoTrabalhoCadastroAlterarRS {
     private String nome;
     private String descricao;
     private LocalDate dataCriacao = LocalDate.now();
     private LocalDate dataRenovacao;
 
     private List<String> membros;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

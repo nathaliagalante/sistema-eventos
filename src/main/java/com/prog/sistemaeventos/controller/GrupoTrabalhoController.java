@@ -3,10 +3,12 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prog.sistemaeventos.controller.request.GrupoTrabalhoRS;
 import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembrosAdicionarEntradaRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioAlterarEntradaNovoRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
+import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroAlterarRS;
+import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroConsultarRS;
+import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroGravarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembroListarUsuariosSaidaRS;
 import com.prog.sistemaeventos.model.GrupoTrabalho;
 import com.prog.sistemaeventos.model.Usuario;
@@ -32,12 +34,12 @@ public class GrupoTrabalhoController {
     }
 
     @GetMapping("/consultar")
-    public List<GrupoTrabalhoRS> getGrupos(){
+    public List<GrupoTrabalhoCadastroConsultarRS> getGrupos(){
         List<GrupoTrabalho> grupos = grupoRepository.findAll();
 
-        List<GrupoTrabalhoRS> gprs = new ArrayList<GrupoTrabalhoRS>();
+        List<GrupoTrabalhoCadastroConsultarRS> gprs = new ArrayList<GrupoTrabalhoCadastroConsultarRS>();
         for(GrupoTrabalho grupo: grupos){
-            GrupoTrabalhoRS gp = new GrupoTrabalhoRS();
+            GrupoTrabalhoCadastroConsultarRS gp = new GrupoTrabalhoCadastroConsultarRS();
             gp.setId(grupo.getId());
             gp.setNome(grupo.getNome());
             gp.setDescricao(grupo.getDescricao());
@@ -48,9 +50,9 @@ public class GrupoTrabalhoController {
 
         return gprs;
     }
-
+    
     @PostMapping("/gravar")
-    public void gravar(@RequestBody GrupoTrabalhoRS grupoRequest) throws Exception{
+    public void gravar(@RequestBody GrupoTrabalhoCadastroGravarRS grupoRequest) throws Exception{
         GrupoTrabalho grupo = new GrupoTrabalho();
         grupo.setNome(grupoRequest.getNome());
         grupo.setDescricao(grupoRequest.getDescricao());
@@ -61,7 +63,7 @@ public class GrupoTrabalhoController {
     }
 
     @PostMapping("/alterar/{id}")
-    public void alterar(@PathVariable("id") Long id, @RequestBody GrupoTrabalhoRS grupoRequest) throws Exception{
+    public void alterar(@PathVariable("id") Long id, @RequestBody GrupoTrabalhoCadastroAlterarRS grupoRequest) throws Exception{
         
         var g = grupoRepository.findById(id);
 
