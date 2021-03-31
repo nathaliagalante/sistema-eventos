@@ -1,9 +1,5 @@
 package com.prog.sistemaeventos.controller.request.Grupo.Membro;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.prog.sistemaeventos.model.Usuario;
 
 public class MembroComboboxSaidaRS {
     private Long id;

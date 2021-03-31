@@ -3,7 +3,8 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prog.sistemaeventos.controller.request.EventoRS;
+import com.prog.sistemaeventos.controller.request.Evento.EventoAlterarRS;
+import com.prog.sistemaeventos.controller.request.Evento.EventoConsultarRS;
 import com.prog.sistemaeventos.model.Evento;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.EventoRepository;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import antlr.debug.Event;
+//import antlr.debug.Event;
 
 @RestController
 @RequestMapping("/evento")
@@ -30,12 +31,12 @@ public class EventoController {
     }
 
     @GetMapping("/consultar")
-    public List<EventoRS> getEventos(){
+    public List<EventoConsultarRS> getEventos(){
         List<Evento> eventos = eventoRepository.findAll();
         
-        List<EventoRS> evrs = new ArrayList<EventoRS>();
+        List<EventoConsultarRS> evrs = new ArrayList<EventoConsultarRS>();
         for (Evento evento: eventos){
-            EventoRS ev = new EventoRS();
+            EventoConsultarRS ev = new EventoConsultarRS();
             ev.setNome(evento.getNome());
             ev.setDescricao(evento.getDescricao());
             ev.setId(evento.getId());
@@ -52,16 +53,16 @@ public class EventoController {
     }
 
     @PostMapping("/gravar")
-    public void gravar(@RequestBody EventoRS eventoRs){
+    public void gravar(@RequestBody EventoConsultarRS eventoRequest){
         Evento evento = new Evento();
-        evento.setDataInicio(eventoRs.getDataInicio());
-        evento.setDataFim(eventoRs.getDataFim());
-        evento.setDescricao(eventoRs.getDescricao());
-        evento.setLocalEvento(eventoRs.getLocalEvento());
-        evento.setLocalInscricao(eventoRs.getLocalInscricao());
-        evento.setNome(eventoRs.getNome());
-        evento.setPublicoAlvo(eventoRs.getPublicoAlvo());
-        evento.setValorInvestimento(eventoRs.getValorInvestimento());
+        evento.setDataInicio(eventoRequest.getDataInicio());
+        evento.setDataFim(eventoRequest.getDataFim());
+        evento.setDescricao(eventoRequest.getDescricao());
+        evento.setLocalEvento(eventoRequest.getLocalEvento());
+        evento.setLocalInscricao(eventoRequest.getLocalInscricao());
+        evento.setNome(eventoRequest.getNome());
+        evento.setPublicoAlvo(eventoRequest.getPublicoAlvo());
+        evento.setValorInvestimento(eventoRequest.getValorInvestimento());
 
         //List<Usuario> usuarios = usuarioRepository.findAll();
 
@@ -84,41 +85,41 @@ public class EventoController {
     }
 
     @PostMapping("/alterar/{id}")
-    public void alterar(@PathVariable("id") Long id, @RequestBody EventoRS eventoRq) throws Exception{
+    public void alterar(@PathVariable("id") Long id, @RequestBody EventoAlterarRS eventoRequest) throws Exception{
 
         var e = eventoRepository.findById(id);
 
         if(e.isPresent()){
             Evento evento = e.get();
-            if(eventoRq.getDataInicio()!=null){
-                evento.setDataInicio(eventoRq.getDataInicio());
+            if(eventoRequest.getDataInicio()!=null){
+                evento.setDataInicio(eventoRequest.getDataInicio());
             }
-            if(eventoRq.getDataFim()!=null){
-                evento.setDataFim(eventoRq.getDataFim());
+            if(eventoRequest.getDataFim()!=null){
+                evento.setDataFim(eventoRequest.getDataFim());
 
             }
-            if(eventoRq.getDescricao()!=null){
-                evento.setDescricao(eventoRq.getDescricao());
+            if(eventoRequest.getDescricao()!=null){
+                evento.setDescricao(eventoRequest.getDescricao());
 
             }
-            if(eventoRq.getLocalEvento()!=null){
-                evento.setLocalEvento(eventoRq.getLocalEvento());
+            if(eventoRequest.getLocalEvento()!=null){
+                evento.setLocalEvento(eventoRequest.getLocalEvento());
 
             }
-            if(eventoRq.getLocalInscricao()!=null){
-                evento.setLocalInscricao(eventoRq.getLocalInscricao());
+            if(eventoRequest.getLocalInscricao()!=null){
+                evento.setLocalInscricao(eventoRequest.getLocalInscricao());
 
             }
-            if(eventoRq.getNome()!=null){
-                evento.setNome(eventoRq.getNome());
+            if(eventoRequest.getNome()!=null){
+                evento.setNome(eventoRequest.getNome());
 
             }
-            if(eventoRq.getPublicoAlvo()!=null){
-                evento.setPublicoAlvo(eventoRq.getPublicoAlvo());
+            if(eventoRequest.getPublicoAlvo()!=null){
+                evento.setPublicoAlvo(eventoRequest.getPublicoAlvo());
 
             }
-            if(eventoRq.getValorInvestimento()!=evento.getValorInvestimento()){
-                evento.setValorInvestimento(eventoRq.getValorInvestimento());
+            if(eventoRequest.getValorInvestimento()!=evento.getValorInvestimento()){
+                evento.setValorInvestimento(eventoRequest.getValorInvestimento());
 
             }
             

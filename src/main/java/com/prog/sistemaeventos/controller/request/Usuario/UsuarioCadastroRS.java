@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.prog.sistemaeventos.model.NivelAcesso;
 import com.prog.sistemaeventos.model.Telefone;
-import com.prog.sistemaeventos.model.Usuario;
 
 
 public class UsuarioCadastroRS {

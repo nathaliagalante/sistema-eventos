@@ -7,8 +7,6 @@ import com.prog.sistemaeventos.controller.request.Usuario.TelefoneAdicionarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroAlterarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroGravarRS;
-import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
-import com.prog.sistemaeventos.model.NivelAcesso;
 import com.prog.sistemaeventos.model.Telefone;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.TelefoneRepository;

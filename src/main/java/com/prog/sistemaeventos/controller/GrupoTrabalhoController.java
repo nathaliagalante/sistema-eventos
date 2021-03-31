@@ -3,13 +3,9 @@ package com.prog.sistemaeventos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembrosAdicionarEntradaRS;
-import com.prog.sistemaeventos.controller.request.Usuario.UsuarioAlterarEntradaNovoRS;
-import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroAlterarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroGravarRS;
-import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembroListarUsuariosSaidaRS;
 import com.prog.sistemaeventos.model.GrupoTrabalho;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.GrupoTrabalhoRepository;
