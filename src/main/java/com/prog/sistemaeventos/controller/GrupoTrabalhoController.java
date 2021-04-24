@@ -43,7 +43,8 @@ public class GrupoTrabalhoController {
             gp.setNome(grupo.getNome());
             gp.setDescricao(grupo.getDescricao());
             gp.setDataCriacao(grupo.getDataCriacao());
-            gp.setDataRenovacao(grupo.getDataRenovacao());  
+            gp.setDataRenovacao(grupo.getDataRenovacao());
+            
             gprs.add(gp);
         }
 
@@ -119,6 +120,9 @@ public class GrupoTrabalhoController {
 
         if(g.isPresent()){
             GrupoTrabalho grupo = g.get();
+            for(Usuario u : grupo.getMembros()){
+                u.setGrupoTrabalho(null);
+            }
             grupoRepository.delete(grupo);
         }
         else{
@@ -223,7 +227,7 @@ public class GrupoTrabalhoController {
 
     
     @CrossOrigin
-    @PostMapping("/gerenciar/{id}/listar")
+    @GetMapping("/gerenciar/{id}/listar")
     public List<MembroListarUsuariosSaidaRS> getMembros(@PathVariable("id") Long id){
         var g = grupoRepository.findById(id);
 

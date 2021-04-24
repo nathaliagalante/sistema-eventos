@@ -8,11 +8,11 @@ POST http://localhost:8080/usuario/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nomeCompleto": "Walter Sobchak",
+    "nomeCompleto": "Frank Reynolds",
     "sexo": "Masculino",
-    "endereco": "Rua WS",
-    "dataNascimento": "1983-03-01",
-    "login": "walter",
+    "endereco": "Rua FR",
+    "dataNascimento": "1950-08-12",
+    "login": "frank",
     "senha": "123"
 
 }
@@ -95,22 +95,22 @@ content-type: application/json
 
 ### GRUPO - EXCLUIR
 
-POST http://localhost:8080/grupo/excluir/1 HTTP/1.1
+POST http://localhost:8080/grupo/excluir/17 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - ADICIONAR MEMBRO
 
-POST http://localhost:8080/grupo/gerenciar/17/membros/adicionar/4 HTTP/1.1
+POST http://localhost:8080/grupo/gerenciar/29/membros/adicionar/6 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - REMOVER MEMBRO
 
-POST http://localhost:8080/grupo/gerenciar/1/membros/remover/2 HTTP/1.1
+POST http://localhost:8080/grupo/gerenciar/17/membros/remover/4 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - ESVAZIAR GRUPO
 
-POST http://localhost:8080/grupo/gerenciar/1/membros/esvaziar HTTP/1.1
+POST http://localhost:8080/grupo/gerenciar/25/membros/esvaziar HTTP/1.1
 content-type: application/json
 
 ### GRUPO - ESCOLHER LÍDER
@@ -120,5 +120,5 @@ content-type: application/json
 
 ### GRUPO - LISTAR MEMBROS
 
-POST http://localhost:8080/grupo/gerenciar/17/listar HTTP/1.1
+GET http://localhost:8080/grupo/gerenciar/17/listar HTTP/1.1
 content-type: application/json
