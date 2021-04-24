@@ -6,11 +6,13 @@ import java.util.List;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroAlterarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroGravarRS;
+import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembroListarUsuariosSaidaRS;
 import com.prog.sistemaeventos.model.GrupoTrabalho;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.GrupoTrabalhoRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,7 @@ public class GrupoTrabalhoController {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/consultar")
     public List<GrupoTrabalhoCadastroConsultarRS> getGrupos(){
         List<GrupoTrabalho> grupos = grupoRepository.findAll();
@@ -46,7 +49,8 @@ public class GrupoTrabalhoController {
 
         return gprs;
     }
-    
+
+    @CrossOrigin
     @PostMapping("/gravar")
     public void gravar(@RequestBody GrupoTrabalhoCadastroGravarRS grupoRequest) throws Exception{
         GrupoTrabalho grupo = new GrupoTrabalho();
@@ -58,7 +62,7 @@ public class GrupoTrabalhoController {
         grupoRepository.save(grupo);
     }
 
-    @PostMapping("/alterar/{id}")
+    /*@PostMapping("/alterar/{id}")
     public void alterar(@PathVariable("id") Long id, @RequestBody GrupoTrabalhoCadastroAlterarRS grupoRequest) throws Exception{
         
         var g = grupoRepository.findById(id);
@@ -86,8 +90,28 @@ public class GrupoTrabalhoController {
         }
         
         
+    }*/
+
+    @CrossOrigin
+    @PostMapping("/alterar")
+    public void alterar(@RequestBody GrupoTrabalhoCadastroAlterarRS grupoRequest) throws Exception{
+        
+        var objeto = grupoRepository.findById(grupoRequest.getId());
+
+        if(objeto.isPresent()){
+            GrupoTrabalho grupo = objeto.get();
+            grupo.setDescricao(grupoRequest.getDescricao());
+            grupo.setDataRenovacao(grupoRequest.getDataRenovacao());
+            grupo.setNome(grupoRequest.getNome());
+            grupoRepository.save(grupo);
+        } else {
+            throw new Exception("Não foi possível alterar a categoria");
+        }
+        
+        
     }
 
+    @CrossOrigin
     @PostMapping("/excluir/{id}")
     public void excluir(@PathVariable("id") Long id) throws Exception{
 
@@ -102,6 +126,7 @@ public class GrupoTrabalhoController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/membros/adicionar/{idmembro}")
     public void adicionarMembro(@PathVariable("id") Long id, @PathVariable("idmembro") Long idmembro) throws Exception{
 
@@ -129,6 +154,7 @@ public class GrupoTrabalhoController {
 
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/membros/remover/{idmembro}")
     public void removerMembro(@PathVariable("id") Long id, @PathVariable("idmembro") Long idmembro) throws Exception{
         var g = grupoRepository.findById(id);
@@ -157,6 +183,7 @@ public class GrupoTrabalhoController {
 
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/membros/esvaziar")
     public void esvaziarGrupo(@PathVariable("id") Long id) throws Exception{
         var g = grupoRepository.findById(id);
@@ -173,6 +200,7 @@ public class GrupoTrabalhoController {
 
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/membros/lider/{idmembro}")
     public void escolherLider(@PathVariable("id") Long id, @PathVariable("idmembro") Long idmembro) throws Exception{
         var g = grupoRepository.findById(id);
@@ -191,6 +219,26 @@ public class GrupoTrabalhoController {
         }else{
             throw new Exception("ID do grupo não encontrado!");
         }
+    }
+
+    
+    @CrossOrigin
+    @PostMapping("/gerenciar/{id}/listar")
+    public List<MembroListarUsuariosSaidaRS> getMembros(@PathVariable("id") Long id){
+        var g = grupoRepository.findById(id);
+
+        List<MembroListarUsuariosSaidaRS> membros = new ArrayList<MembroListarUsuariosSaidaRS>();
+
+        if(g.isPresent()){
+            GrupoTrabalho grupo = g.get();
+            for(Usuario u : grupo.getMembros()){
+                MembroListarUsuariosSaidaRS m = new MembroListarUsuariosSaidaRS();
+                m.setId(u.getId());
+                m.setNomeCompleto(u.getNomeCompleto());
+                membros.add(m);
+            }
+        }
+        return membros;
     }
 
    /* @PostMapping("/gerenciar/{id}/membros/listar")
