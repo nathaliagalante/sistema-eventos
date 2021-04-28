@@ -6,7 +6,9 @@ import java.util.List;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroAlterarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Grupo.GrupoTrabalhoCadastroGravarRS;
+import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembroComboboxSaidaRS;
 import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembroListarUsuariosSaidaRS;
+import com.prog.sistemaeventos.controller.request.Grupo.Membro.MembroSelecionarLiderEntradaRS;
 import com.prog.sistemaeventos.model.GrupoTrabalho;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.GrupoTrabalhoRepository;
@@ -44,7 +46,9 @@ public class GrupoTrabalhoController {
             gp.setDescricao(grupo.getDescricao());
             gp.setDataCriacao(grupo.getDataCriacao());
             gp.setDataRenovacao(grupo.getDataRenovacao());
-            
+            if(grupo.getLider()!=null){
+                gp.setLider(grupo.getLider().getNomeCompleto());
+            }      
             gprs.add(gp);
         }
 
@@ -244,6 +248,42 @@ public class GrupoTrabalhoController {
         }
         return membros;
     }
+
+    @CrossOrigin
+    @GetMapping("/gerenciar/listargroupless")
+    public List<MembroComboboxSaidaRS> listarSemGrupo(){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<MembroComboboxSaidaRS> membros = new ArrayList<MembroComboboxSaidaRS>();
+        for(Usuario u : usuarios){
+            if(u.getGrupoTrabalho()==null){
+                MembroComboboxSaidaRS m = new MembroComboboxSaidaRS();
+                m.setId(u.getId());
+                m.setNomeCompleto(u.getNomeCompleto());
+                membros.add(m);
+            }
+        }
+        return membros;
+
+    }
+
+    /*@CrossOrigin
+    @GetMapping("/gerenciar/listarlideres")
+    public List<MembroSelecionarLiderEntradaRS> listarLider(@PathVariable("id") Long id){
+        var g = grupoRepository.findById(id);
+
+        List<MembroSelecionarLiderEntradaRS> membros = new ArrayList<MembroSelecionarLiderEntradaRS>();
+
+        if(g.isPresent()){
+            GrupoTrabalho grupo = g.get();
+            for(Usuario u : grupo.getMembros()){
+                MembroSelecionarLiderEntradaRS m = new MembroSelecionarLiderEntradaRS();
+                m.setId(u.getId());
+                m.setNomeCompleto(u.getNomeCompleto());
+                membros.add(m);
+            }
+        }
+        return membros;
+    }*/
 
    /* @PostMapping("/gerenciar/{id}/membros/listar")
     public List<MembroListarUsuariosSaidaRS> listarMembrosGrupo(@PathVariable("id") Long id){

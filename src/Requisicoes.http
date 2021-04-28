@@ -8,11 +8,11 @@ POST http://localhost:8080/usuario/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nomeCompleto": "Frank Reynolds",
-    "sexo": "Masculino",
-    "endereco": "Rua FR",
-    "dataNascimento": "1950-08-12",
-    "login": "frank",
+    "nomeCompleto": "Elaine Benes",
+    "sexo": "Feminino",
+    "endereco": "Rua EB",
+    "dataNascimento": "1960-03-11",
+    "login": "elaine",
     "senha": "123"
 
 }
@@ -100,7 +100,7 @@ content-type: application/json
 
 ### GRUPO - ADICIONAR MEMBRO
 
-POST http://localhost:8080/grupo/gerenciar/29/membros/adicionar/6 HTTP/1.1
+POST http://localhost:8080/grupo/gerenciar/28/membros/adicionar/8 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - REMOVER MEMBRO
@@ -115,10 +115,15 @@ content-type: application/json
 
 ### GRUPO - ESCOLHER LÍDER
 
-POST http://localhost:8080/grupo/gerenciar/1/membros/lider/2 HTTP/1.1
+POST http://localhost:8080/grupo/gerenciar/29/membros/lider/5 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - LISTAR MEMBROS
 
-GET http://localhost:8080/grupo/gerenciar/17/listar HTTP/1.1
+GET http://localhost:8080/grupo/gerenciar/29/listar HTTP/1.1
+content-type: application/json
+
+### GRUPO - LISTAR USUÁRIOS SEM GRUPO
+
+GET http://localhost:8080/grupo/gerenciar/listargroupless HTTP/1.1
 content-type: application/json

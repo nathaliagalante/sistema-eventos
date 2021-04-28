@@ -9,6 +9,7 @@ public class GrupoTrabalhoCadastroConsultarRS {
     private String descricao;
     private LocalDate dataCriacao = LocalDate.now();
     private LocalDate dataRenovacao;
+    private String lider;
 
     private List<String> membros;
 
@@ -58,6 +59,14 @@ public class GrupoTrabalhoCadastroConsultarRS {
 
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getLider() {
+        return lider;
+    }
+
+    public void setLider(String lider) {
+        this.lider = lider;
     }
 
     
