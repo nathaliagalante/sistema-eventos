@@ -10,6 +10,7 @@ import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.EventoRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ public class EventoController {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/consultar")
     public List<EventoConsultarRS> getEventos(){
         List<Evento> eventos = eventoRepository.findAll();

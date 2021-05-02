@@ -42,26 +42,33 @@ POST http://localhost:8080/evento/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Evento de teste",
-    "descricao": "Teste de requisições e de banco dados",
-    "dataInicio": "2021-02-28",
-    "dataFim": "2021-03-06"
+    "nome": "Evento teste 4",
+    "descricao": "Teste 4",
+    "dataInicio": "2021-05-05",
+    "dataFim": "2021-05-08",
+    "localEvento": "Rua 5, Avenida ET4"
 
 }
 
 ### EVENTO - ALTERAR
 
-POST http://localhost:8080/evento/alterar/2 HTTP/1.1
+POST http://localhost:8080/evento/alterar/7 HTTP/1.1
 content-type: application/json
 
 {
-    "localEvento": "FeMASS"
+    "localEvento": "FeMASS",
+    "publicoAlvo": "Desenvolvedores"
 
 }
 
 ### EVENTO - EXCLUIR
 
 POST http://localhost:8080/evento/excluir/1 HTTP/1.1
+content-type: application/json
+
+### EVENTO - ANIVERSÁRIOS
+
+POST http://localhost:8080/evento/aniversarios/2021 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - CONSULTAR
