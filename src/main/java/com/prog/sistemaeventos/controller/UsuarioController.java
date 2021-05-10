@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.prog.sistemaeventos.controller.request.Usuario.TelefoneAdicionarRS;
+import com.prog.sistemaeventos.controller.request.Usuario.UsuarioListaSaidaRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroAlterarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroGravarRS;
@@ -66,6 +67,24 @@ public class UsuarioController {
             }
             user.setTelefones(telefonesList);
                         
+            
+            usrs.add(user);
+        }
+
+        return usrs;
+    }
+
+    @GetMapping("/listar")
+    public List<UsuarioListaSaidaRS> getListaUsuarios(){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        List<UsuarioListaSaidaRS> usrs = new ArrayList<UsuarioListaSaidaRS>();
+        
+        for(Usuario usuario: usuarios){
+            UsuarioListaSaidaRS user = new UsuarioListaSaidaRS();
+            user.setDataNascimento(usuario.getDataNascimento());
+            user.setId(usuario.getId());
+            user.setNomeCompleto(usuario.getNomeCompleto());
             
             usrs.add(user);
         }
