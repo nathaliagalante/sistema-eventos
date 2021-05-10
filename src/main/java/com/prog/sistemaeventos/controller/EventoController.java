@@ -54,6 +54,7 @@ public class EventoController {
         return evrs;
     }
 
+    @CrossOrigin
     @PostMapping("/gravar")
     public void gravar(@RequestBody EventoConsultarRS eventoRequest){
         Evento evento = new Evento();
@@ -72,6 +73,7 @@ public class EventoController {
         eventoRepository.save(evento);
     }
 
+    @CrossOrigin
     @PostMapping("/excluir/{id}")
     public void excluir(@PathVariable("id") Long id) throws Exception{
 
@@ -86,6 +88,7 @@ public class EventoController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/alterar/{id}")
     public void alterar(@PathVariable("id") Long id, @RequestBody EventoAlterarRS eventoRequest) throws Exception{
 
@@ -134,11 +137,12 @@ public class EventoController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/aniversarios/{ano}")
     public void autocadastrarAniversarios(@PathVariable("ano") Integer ano){
         for(Usuario user: usuarioRepository.findAll()){
            for(Evento event: eventoRepository.findAll()){
-               if(event.getNome().equals("Aniversário de " + user.getNomeCompleto()) && event.getDataInicio().getYear()==ano){
+               if(event.getNome().equals("Aniversário de " + user.getNomeCompleto()) && event.getDataInicio().getYear()!=ano){
                    eventoRepository.delete(event);
                }
            }
