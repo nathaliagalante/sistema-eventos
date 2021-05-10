@@ -13,6 +13,7 @@ import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.TelefoneRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class UsuarioController {
         this.telefoneRepository = telefoneRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/consultar")
     public List<UsuarioCadastroConsultarRS> getUsuarios(){
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -73,6 +75,7 @@ public class UsuarioController {
         return usrs;
     }
 
+    @CrossOrigin
     @PostMapping("/login")
     public void logar(@RequestBody LoginEntradaRS loginRequest){
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -86,6 +89,7 @@ public class UsuarioController {
 
     }
 
+    @CrossOrigin
     @GetMapping("/login/visualizar")
     public LoginEntradaRS visualizarLogin(){
         LoginEntradaRS loginRS = new LoginEntradaRS();
@@ -95,6 +99,7 @@ public class UsuarioController {
         return loginRS;
     }
 
+    @CrossOrigin
     @PostMapping("/gravar")
     public void gravar(@RequestBody UsuarioCadastroGravarRS usuarioRequest) throws Exception{
         Usuario usuario = new Usuario();
@@ -110,6 +115,7 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
     }
 
+    @CrossOrigin
     @PostMapping("/alterar/{id}")
     public void alterar(@PathVariable("id") Long id, @RequestBody UsuarioCadastroAlterarRS usuarioRequest) throws Exception{
         
@@ -147,6 +153,7 @@ public class UsuarioController {
         
     }
 
+    @CrossOrigin
     @PostMapping("/excluir/{id}")
     public void excluir(@PathVariable("id") Long id) throws Exception{
 
@@ -161,6 +168,7 @@ public class UsuarioController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/parente/adicionar/{idparente}")
     public void adicionarParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente) throws Exception{
         
@@ -181,6 +189,7 @@ public class UsuarioController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/parente/remover/{idparente}")
     public void removerParente(@PathVariable("id") Long id, @PathVariable("idparente") Long idparente) throws Exception{
         
@@ -205,6 +214,7 @@ public class UsuarioController {
     }
 
     /******************* TELEFONE *********************/
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/telefone/adicionar")
     public void adicionarTelefone(@PathVariable("id") Long id, @RequestBody TelefoneAdicionarRS telefoneRequest) throws Exception{
         var u = usuarioRepository.findById(id);
@@ -223,6 +233,7 @@ public class UsuarioController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/gerenciar/{id}/telefone/remover/{idtelefone}")
     public void removerTelefone(@PathVariable("id") Long id, @PathVariable("idtelefone") Long idtelefone) throws Exception{
         var u = usuarioRepository.findById(id);
