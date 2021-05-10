@@ -1,25 +1,36 @@
-### USUÁRIO - CONSULTAR
+### USUÁRIO - LOGIN VISUALIZAR
+GET http://localhost:8090/usuario/login/visualizar HTTP/1.1
 
-GET http://localhost:8080/usuario/consultar HTTP/1.1
-
-### USUÁRIO - GRAVAR
-
-POST http://localhost:8080/usuario/gravar HTTP/1.1
+### USUÁRIO - LOGAR
+POST http://localhost:8090/usuario/login/ HTTP/1.1
 content-type: application/json
 
 {
-    "nomeCompleto": "Elaine Benes",
+    "login": "nathalia",
+    "senha": "123"
+}
+### USUÁRIO - CONSULTAR
+
+GET http://localhost:8090/usuario/consultar HTTP/1.1
+
+### USUÁRIO - GRAVAR
+
+POST http://localhost:8090/usuario/gravar HTTP/1.1
+content-type: application/json
+
+{
+    "nomeCompleto": "Nathalia Galante",
     "sexo": "Feminino",
-    "endereco": "Rua EB",
-    "dataNascimento": "1960-03-11",
-    "login": "elaine",
+    "endereco": "Rua NG",
+    "dataNascimento": "1998-01-02",
+    "login": "nathalia",
     "senha": "123"
 
 }
 
 ### USUÁRIO - ALTERAR
 
-POST http://localhost:8080/usuario/alterar/2 HTTP/1.1
+POST http://localhost:8090/usuario/alterar/2 HTTP/1.1
 content-type: application/json
 
 {
@@ -29,16 +40,16 @@ content-type: application/json
 
 ### USUÁRIO - EXCLUIR
 
-POST http://localhost:8080/usuario/excluir/1 HTTP/1.1
+POST http://localhost:8090/usuario/excluir/1 HTTP/1.1
 content-type: application/json
 
 ### EVENTO - CONSULTAR
 
-GET http://localhost:8080/evento/consultar HTTP/1.1
+GET http://localhost:8090/evento/consultar HTTP/1.1
 
 ### EVENTO - GRAVAR
 
-POST http://localhost:8080/evento/gravar HTTP/1.1
+POST http://localhost:8090/evento/gravar HTTP/1.1
 content-type: application/json
 
 {
@@ -52,7 +63,7 @@ content-type: application/json
 
 ### EVENTO - ALTERAR
 
-POST http://localhost:8080/evento/alterar/7 HTTP/1.1
+POST http://localhost:8090/evento/alterar/7 HTTP/1.1
 content-type: application/json
 
 {
@@ -63,21 +74,21 @@ content-type: application/json
 
 ### EVENTO - EXCLUIR
 
-POST http://localhost:8080/evento/excluir/1 HTTP/1.1
+POST http://localhost:8090/evento/excluir/1 HTTP/1.1
 content-type: application/json
 
 ### EVENTO - ANIVERSÁRIOS
 
-POST http://localhost:8080/evento/aniversarios/2021 HTTP/1.1
+POST http://localhost:8090/evento/aniversarios/2021 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - CONSULTAR
 
-GET http://localhost:8080/grupo/consultar HTTP/1.1
+GET http://localhost:8090/grupo/consultar HTTP/1.1
 
 ### GRUPO - GRAVAR
 
-POST http://localhost:8080/grupo/gravar HTTP/1.1
+POST http://localhost:8090/grupo/gravar HTTP/1.1
 content-type: application/json
 
 {
@@ -89,7 +100,7 @@ content-type: application/json
 
 ### GRUPO - ALTERAR
 
-POST http://localhost:8080/grupo/alterar HTTP/1.1
+POST http://localhost:8090/grupo/alterar HTTP/1.1
 content-type: application/json
 
 {
@@ -102,35 +113,35 @@ content-type: application/json
 
 ### GRUPO - EXCLUIR
 
-POST http://localhost:8080/grupo/excluir/17 HTTP/1.1
+POST http://localhost:8090/grupo/excluir/17 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - ADICIONAR MEMBRO
 
-POST http://localhost:8080/grupo/gerenciar/28/membros/adicionar/8 HTTP/1.1
+POST http://localhost:8090/grupo/gerenciar/28/membros/adicionar/8 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - REMOVER MEMBRO
 
-POST http://localhost:8080/grupo/gerenciar/17/membros/remover/4 HTTP/1.1
+POST http://localhost:8090/grupo/gerenciar/17/membros/remover/4 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - ESVAZIAR GRUPO
 
-POST http://localhost:8080/grupo/gerenciar/25/membros/esvaziar HTTP/1.1
+POST http://localhost:8090/grupo/gerenciar/25/membros/esvaziar HTTP/1.1
 content-type: application/json
 
 ### GRUPO - ESCOLHER LÍDER
 
-POST http://localhost:8080/grupo/gerenciar/29/membros/lider/5 HTTP/1.1
+POST http://localhost:8090/grupo/gerenciar/29/membros/lider/5 HTTP/1.1
 content-type: application/json
 
 ### GRUPO - LISTAR MEMBROS
 
-GET http://localhost:8080/grupo/gerenciar/29/listar HTTP/1.1
+GET http://localhost:8090/grupo/gerenciar/29/listar HTTP/1.1
 content-type: application/json
 
 ### GRUPO - LISTAR USUÁRIOS SEM GRUPO
 
-GET http://localhost:8080/grupo/gerenciar/listargroupless HTTP/1.1
+GET http://localhost:8090/grupo/gerenciar/listargroupless HTTP/1.1
 content-type: application/json
