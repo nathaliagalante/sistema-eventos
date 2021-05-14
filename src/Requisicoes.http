@@ -48,10 +48,10 @@ POST http://localhost:8090/evento/gravar HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Evento teste 4",
+    "nome": "Evento teste 8",
     "descricao": "Teste 4",
-    "dataInicio": "2021-05-05",
-    "dataFim": "2021-05-08",
+    "dataInicio": "2021-05-11",
+    "dataFim": "2021-05-13",
     "localEvento": "Rua 5, Avenida ET4"
 
 }
