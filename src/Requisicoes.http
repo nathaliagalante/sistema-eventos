@@ -2,13 +2,8 @@
 GET http://localhost:8090/usuario/login/visualizar HTTP/1.1
 
 ### USUÁRIO - LOGAR
-POST http://localhost:8090/usuario/login/ HTTP/1.1
-content-type: application/json
+GET http://localhost:8090/usuario/login/nathalia/123 HTTP/1.1
 
-{
-    "login": "nathalia",
-    "senha": "123"
-}
 ### USUÁRIO - CONSULTAR
 
 GET http://localhost:8090/usuario/consultar HTTP/1.1

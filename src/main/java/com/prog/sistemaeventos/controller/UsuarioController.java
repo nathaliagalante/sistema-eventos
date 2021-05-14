@@ -94,16 +94,21 @@ public class UsuarioController {
         return usrs;
     }
 
-    @PostMapping("/login")
-    public void logar(@RequestBody LoginEntradaRS loginRequest){
+    @CrossOrigin
+    @GetMapping("/login/{login}/{senha}")
+    public Usuario logar(@PathVariable("login") String login, @PathVariable("senha") String senha) throws Exception{
         List<Usuario> usuarios = usuarioRepository.findAll();
 
         for (Usuario u: usuarios){
-            if(u.getLogin().equals(loginRequest.getLogin()) && u.getSenha().equals(loginRequest.getSenha())){
+            if(u.getLogin().equals(login) && u.getSenha().equals(senha)){
                 usuarioConectado = u;
                 conectado = true;
+
+                return u;
             } 
         }
+
+        throw new Exception("Usuário não encontrado");
 
     }
 
