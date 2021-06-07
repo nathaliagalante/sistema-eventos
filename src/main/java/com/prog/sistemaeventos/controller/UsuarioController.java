@@ -18,6 +18,7 @@ import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.TelefoneRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ public class UsuarioController {
     @CrossOrigin
     @GetMapping("/consultar")
     public List<UsuarioCadastroConsultarRS> getUsuarios(){
-        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<Usuario> usuarios = usuarioRepository.findAll(Sort.by("nomeCompleto").ascending());
 
         List<UsuarioCadastroConsultarRS> usrs = new ArrayList<UsuarioCadastroConsultarRS>();
         for(Usuario usuario: usuarios){

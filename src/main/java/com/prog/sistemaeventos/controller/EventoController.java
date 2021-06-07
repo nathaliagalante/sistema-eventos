@@ -10,6 +10,7 @@ import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.EventoRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ public class EventoController {
     @CrossOrigin
     @GetMapping("/consultar")
     public List<EventoConsultarRS> getEventos(){
-        List<Evento> eventos = eventoRepository.findAll();
+        List<Evento> eventos = eventoRepository.findAll(Sort.by("dataInicio").ascending());
         
         List<EventoConsultarRS> evrs = new ArrayList<EventoConsultarRS>();
         for (Evento evento: eventos){
@@ -142,7 +143,7 @@ public class EventoController {
     public void autocadastrarAniversarios(@PathVariable("ano") Integer ano){
         for(Usuario user: usuarioRepository.findAll()){
            for(Evento event: eventoRepository.findAll()){
-               if(event.getNome().equals("Aniversário de " + user.getNomeCompleto()) && event.getDataInicio().getYear()!=ano){
+               if(event.getNome().equals("Aniversário de " + user.getNomeCompleto())){
                    eventoRepository.delete(event);
                }
            }

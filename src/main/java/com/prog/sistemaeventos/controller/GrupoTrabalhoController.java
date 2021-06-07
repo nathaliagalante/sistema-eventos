@@ -14,6 +14,7 @@ import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.GrupoTrabalhoRepository;
 import com.prog.sistemaeventos.repository.UsuarioRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +37,7 @@ public class GrupoTrabalhoController {
     @CrossOrigin
     @GetMapping("/consultar")
     public List<GrupoTrabalhoCadastroConsultarRS> getGrupos(){
-        List<GrupoTrabalho> grupos = grupoRepository.findAll();
+        List<GrupoTrabalho> grupos = grupoRepository.findAll(Sort.by("nome").ascending());
 
         List<GrupoTrabalhoCadastroConsultarRS> gprs = new ArrayList<GrupoTrabalhoCadastroConsultarRS>();
         for(GrupoTrabalho grupo: grupos){
