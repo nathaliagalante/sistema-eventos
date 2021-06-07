@@ -2,13 +2,17 @@ package com.prog.sistemaeventos.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.prog.sistemaeventos.controller.request.Usuario.ParenteListarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.TelefoneAdicionarRS;
+import com.prog.sistemaeventos.controller.request.Usuario.TelefoneListarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioListaSaidaRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroAlterarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroGravarRS;
 import com.prog.sistemaeventos.controller.request.LoginEntradaRS;
+import com.prog.sistemaeventos.model.NivelAcesso;
 import com.prog.sistemaeventos.model.Telefone;
 import com.prog.sistemaeventos.model.Usuario;
 import com.prog.sistemaeventos.repository.TelefoneRepository;
@@ -72,7 +76,7 @@ public class UsuarioController {
             
             usrs.add(user);
         }
-
+        
         return usrs;
     }
 
@@ -133,7 +137,7 @@ public class UsuarioController {
         usuario.setNomeCompleto(usuarioRequest.getNomeCompleto());
         usuario.setSenha(usuarioRequest.getSenha());
         usuario.setSexo(usuarioRequest.getSexo());
-        usuario.setNivelAcesso(usuarioRequest.getNivelAcesso());
+        usuario.setNivelAcesso(NivelAcesso.valueOf(usuarioRequest.getNivelAcesso()));
 
         usuarioRepository.save(usuario);
     }
@@ -236,6 +240,50 @@ public class UsuarioController {
         }
     }
 
+    @CrossOrigin
+    @GetMapping("/gerenciar/{id}/parente/listar")
+    public List<ParenteListarRS> listarParentes(@PathVariable("id") Long id) throws Exception{
+        var u = usuarioRepository.findById(id);
+
+        if(u.isPresent()){
+            Usuario usuario = u.get();
+            List<ParenteListarRS> parentes = new ArrayList<>();
+            for(Usuario parente: usuario.getParentes()){
+                ParenteListarRS par = new ParenteListarRS();
+                par.setId(parente.getId());
+                par.setNomeCompleto(parente.getNomeCompleto());
+                parentes.add(par);
+            }
+            return parentes;
+        }else{
+            throw new Exception("ID não encontrado!");
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/gerenciar/{id}/parente/listarOpcoes")
+    public List<ParenteListarRS> listarParentesOpcoes(@PathVariable("id") Long id) throws Exception{
+        var u = usuarioRepository.findById(id);
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        
+        if(u.isPresent()){
+            Usuario usuario = u.get();
+            List<ParenteListarRS> parentes = new ArrayList<>();
+            
+            for(Usuario parente: usuarios){
+                if(!parente.getParentes().contains(usuario) && !parente.equals(usuario)){
+                    ParenteListarRS par = new ParenteListarRS();
+                    par.setId(parente.getId());
+                    par.setNomeCompleto(parente.getNomeCompleto());
+                    parentes.add(par);
+                }       
+            }
+            return parentes;
+        }else{
+            throw new Exception("ID não encontrado!");
+        }
+    }
+
     /******************* TELEFONE *********************/
     @CrossOrigin
     @PostMapping("/gerenciar/{id}/telefone/adicionar")
@@ -275,5 +323,31 @@ public class UsuarioController {
         }
     }
 
-    
+    @CrossOrigin
+    @GetMapping("/gerenciar/{id}/telefone/listar")
+    public List<TelefoneListarRS> listarTelefones(@PathVariable("id") Long id) throws Exception{
+        var u = usuarioRepository.findById(id);
+
+        if(u.isPresent()){
+            Usuario usuario = u.get();
+            List<TelefoneListarRS> telefones = new ArrayList<>();
+            for(Telefone telefone: usuario.getTelefones()){
+                TelefoneListarRS tel = new TelefoneListarRS();
+                tel.setId(telefone.getId().toString());
+                tel.setDdd(telefone.getDdd());
+                tel.setNumero(telefone.getNumero());
+                telefones.add(tel);
+            }
+            return telefones;
+        }else{
+            throw new Exception("ID não encontrado!");
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/listarNivelAcesso")
+    public NivelAcesso[] getNivelAcesso() throws Exception{
+        
+        return NivelAcesso.values();
+    }
 }

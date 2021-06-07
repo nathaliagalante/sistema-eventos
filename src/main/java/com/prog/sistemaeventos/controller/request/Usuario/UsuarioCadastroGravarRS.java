@@ -12,7 +12,7 @@ public class UsuarioCadastroGravarRS {
     private String login;
     private String senha;
     private String grupo;
-    private NivelAcesso nivelAcesso;
+    private String nivelAcesso;
 
     public String getNomeCompleto() {
         return nomeCompleto;
@@ -70,11 +70,11 @@ public class UsuarioCadastroGravarRS {
         this.grupo = grupo;
     }
 
-    public NivelAcesso getNivelAcesso() {
+    public String getNivelAcesso() {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(NivelAcesso nivelAcesso) {
+    public void setNivelAcesso(String nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
 
