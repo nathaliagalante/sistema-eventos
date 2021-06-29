@@ -13,6 +13,7 @@ public class UsuarioCadastroGravarRS {
     private String senha;
     private String grupo;
     private String nivelAcesso;
+    private String foto;
 
     public String getNomeCompleto() {
         return nomeCompleto;
@@ -78,4 +79,13 @@ public class UsuarioCadastroGravarRS {
         this.nivelAcesso = nivelAcesso;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    
 }

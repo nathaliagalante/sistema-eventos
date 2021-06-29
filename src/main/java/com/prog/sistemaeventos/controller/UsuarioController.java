@@ -55,6 +55,7 @@ public class UsuarioController {
             user.setNomeCompleto(usuario.getNomeCompleto());
             user.setSenha(usuario.getSenha());
             user.setSexo(usuario.getSexo()); 
+            user.setFoto(usuario.getFoto());
             if(usuario.getGrupoTrabalho()!=null){
                 user.setGrupo(usuario.getGrupoTrabalho().getNome());
             }
@@ -139,6 +140,7 @@ public class UsuarioController {
         usuario.setSenha(usuarioRequest.getSenha());
         usuario.setSexo(usuarioRequest.getSexo());
         usuario.setNivelAcesso(NivelAcesso.valueOf(usuarioRequest.getNivelAcesso()));
+        usuario.setFoto(usuarioRequest.getFoto());
 
         usuarioRepository.save(usuario);
     }
@@ -171,6 +173,9 @@ public class UsuarioController {
             }
             if(usuarioRequest.getNivelAcesso()!=null){
                 usuario.setNivelAcesso(usuarioRequest.getNivelAcesso());
+            }
+            if(usuarioRequest.getFoto()!=null){
+                usuario.setFoto(usuarioRequest.getFoto());
             }
             usuarioRepository.save(usuario);
         }

@@ -16,6 +16,7 @@ public class UsuarioCadastroConsultarRS {
     private String senha;
     private String grupo;
     private NivelAcesso nivelAcesso;
+    private String foto;
 
     private List<String> telefones = new ArrayList<>();
 
@@ -108,5 +109,15 @@ public class UsuarioCadastroConsultarRS {
     public void setNivelAcesso(NivelAcesso nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    
 
 }
