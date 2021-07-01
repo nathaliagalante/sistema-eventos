@@ -1,14 +1,26 @@
 package com.prog.sistemaeventos.controller.request;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.prog.sistemaeventos.model.NivelAcesso;
 
 public class LoginSaidaRS {
     private Long id;
     private String nomeCompleto;
+    private String sexo;
+    private String endereco;
     private LocalDate dataNascimento;
-    private String nivelAcesso;
     private String login;
+    private String senha;
+    private String grupo;
+    private NivelAcesso nivelAcesso;
     private String foto;
+
+    private List<String> telefones = new ArrayList<>();
+
+    private List<String> parentes = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -26,20 +38,28 @@ public class LoginSaidaRS {
         this.nomeCompleto = nomeCompleto;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    public String getNivelAcesso() {
-        return nivelAcesso;
-    }
-
-    public void setNivelAcesso(String nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
     }
 
     public String getLogin() {
@@ -50,15 +70,51 @@ public class LoginSaidaRS {
         this.login = login;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public List<String> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<String> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<String> getParentes() {
+        return parentes;
+    }
+
+    public void setParentes(List<String> parentes) {
+        this.parentes = parentes;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    public NivelAcesso getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(NivelAcesso nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
+
     public String getFoto() {
         return foto;
     }
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    
-
-    
+    }    
 }

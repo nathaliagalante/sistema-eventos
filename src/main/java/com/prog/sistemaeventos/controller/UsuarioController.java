@@ -12,6 +12,7 @@ import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroAlterar
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroConsultarRS;
 import com.prog.sistemaeventos.controller.request.Usuario.UsuarioCadastroGravarRS;
 import com.prog.sistemaeventos.controller.request.LoginEntradaRS;
+import com.prog.sistemaeventos.controller.request.LoginSaidaRS;
 import com.prog.sistemaeventos.model.NivelAcesso;
 import com.prog.sistemaeventos.model.Telefone;
 import com.prog.sistemaeventos.model.Usuario;
@@ -102,7 +103,7 @@ public class UsuarioController {
 
     @CrossOrigin
     @GetMapping("/login/{login}/{senha}")
-    public Usuario logar(@PathVariable("login") String login, @PathVariable("senha") String senha) throws Exception{
+    public LoginSaidaRS logar(@PathVariable("login") String login, @PathVariable("senha") String senha) throws Exception{
         List<Usuario> usuarios = usuarioRepository.findAll();
 
         for (Usuario u: usuarios){
@@ -110,7 +111,36 @@ public class UsuarioController {
                 usuarioConectado = u;
                 conectado = true;
 
-                return u;
+                LoginSaidaRS user = new LoginSaidaRS();
+                user.setDataNascimento(u.getDataNascimento());
+                user.setEndereco(u.getEndereco());
+                user.setId(u.getId());
+                user.setLogin(u.getLogin());
+                user.setNomeCompleto(u.getNomeCompleto());
+                user.setSenha(u.getSenha());
+                user.setSexo(u.getSexo()); 
+                user.setFoto(u.getFoto());
+                if(u.getGrupoTrabalho()!=null){
+                    user.setGrupo(u.getGrupoTrabalho().getNome());
+                }
+                if(u.getNivelAcesso()!=null){
+                    user.setNivelAcesso(u.getNivelAcesso());
+                }
+
+                List<String> parentesList = new ArrayList<>();
+                for(Usuario par: u.getParentes()){
+                    parentesList.add(par.getNomeCompleto());
+                }
+                user.setParentes(parentesList);
+
+                List<String> telefonesList = new ArrayList<>();
+                for(Telefone tel: u.getTelefones()){
+                    telefonesList.add(tel.toString());
+                }
+
+                user.setTelefones(telefonesList);
+
+                return user;
             } 
         }
 
@@ -122,11 +152,32 @@ public class UsuarioController {
     @GetMapping("/login/visualizar")
     public LoginEntradaRS visualizarLogin(){
         LoginEntradaRS loginRS = new LoginEntradaRS();
+        if(usuarioConectado==null){
+            loginRS.setIsAdm(false);
+            return loginRS;
+        }
+        loginRS.setId(usuarioConectado.getId());
         loginRS.setLogin(usuarioConectado.getLogin());
         loginRS.setSenha(usuarioConectado.getSenha());
+        if(usuarioConectado.getNivelAcesso().name()=="Membro"){
+            loginRS.setIsAdm(false);
+        }
+        else if(usuarioConectado.getNivelAcesso().name()=="Administrador"){
+            loginRS.setIsAdm(true);
+        }
+        else{
+            loginRS.setIsAdm(false);
+        }
 
         return loginRS;
     }
+
+    @CrossOrigin
+    @PostMapping("/logout")
+    public void logout(){
+        usuarioConectado = null;
+    }
+
 
     @CrossOrigin
     @PostMapping("/gravar")
